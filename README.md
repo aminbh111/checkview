@@ -1,27 +1,27 @@
 # Check View
 An animating check mark
 
-![Sample App](https://github.com/cdflynn/checkview/blob/master/sample/img/check_sample.gif?raw=true)
+![Sample App](https://github.com/cdflynn/crossView/blob/master/sample/img/check_sample.gif?raw=true)
 
 
 ## Usage
-Add a `CheckView` to your layout
+Add a `CrossView` to your layout
 
 ```xml
-    <cdflynn.android.library.checkview.CheckView
+    <nl.schmit.animationView.crossView.CrossView
         android:id="@+id/check"
         android:layout_width="200dp"
         android:layout_height="200dp"
-        app:checkView_strokeColor="@color/green"
-        app:checkView_strokeWidth="@dimen/check_stroke_width"/>
+        app:crossView_strokeColor="@color/green"
+        app:crossView_strokeWidth="@dimen/check_stroke_width"/>
 ```
 
-Note that you can specify a stroke width and color with xml attributes `checkView_strokeWidth` and `checkView_strokeColor` respectively.
+Note that you can specify a stroke width and color with xml attributes `crossView_strokeWidth` and `crossView_strokeColor` respectively.
 
 Call `check()`:
 
 ```java
-    mCheckView.check();
+    mCrossView.check();
 ```
 
 
@@ -41,6 +41,6 @@ Add jitpack to your root `build.gradle`
 Add as a dependency
 ```gradle
 	dependencies {
-	        implementation 'com.github.cdflynn:checkview:v1.1'
+	        implementation 'com.github.cdflynn:crossView:v1.1'
 	}
 ```
