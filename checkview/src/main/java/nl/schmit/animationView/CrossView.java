@@ -46,15 +46,15 @@ public class CrossView extends View {
     /**
      * The path of the check mark
      */
-    private Path mPathCheck;
+    private Path mPathCheck,mPathCheck2;
     /**
      * The length of the start of the check mark, before the pivot point
      */
-    private float mMinorContourLength;
+    private float mMinorContourLength,mMinorContourLength2;
     /**
      * The length of the check mark after the pivot point, and up to the end point.
      */
-    private float mMajorContourLength;
+    private float mMajorContourLength,mMajorContourLength2;
     /**
      * The size of the check mark and circle paths.
      */
@@ -71,11 +71,11 @@ public class CrossView extends View {
      */
     private RectF mCircleRect;
     private Paint mPaint;
-    private PathMeasure mPathMeasure;
+    private PathMeasure mPathMeasure,mPathMeasure2;
     /**
      * A pre-allocated float array to hold path measure results.
      */
-    private float[] mPoint;
+    private float[] mPoint,mPoint2;
     /**
      * Where the check mark starts
      */
@@ -88,6 +88,17 @@ public class CrossView extends View {
      * Where the check mark ends
      */
     private PointF mCheckEnd;
+
+
+    private PointF mCheckStart2;
+    /**
+     * Where the check mark turns upward
+     */
+    private PointF mCheckPivot2;
+    /**
+     * Where the check mark ends
+     */
+    private PointF mCheckEnd2;
     /**
      * Where the circle border starts
      */
@@ -121,14 +132,21 @@ public class CrossView extends View {
     private void init(Context context, @Nullable AttributeSet attrs) {
         resolveAttributes(context, attrs);
         mPathCheck = new Path();
+        mPathCheck2 = new Path();
         mPathCircle = new Path();
         mDrawingRect = new RectF();
         mCircleRect = new RectF();
         mPathMeasure = new PathMeasure();
         mPoint = new float[2];
+        mPathMeasure2 = new PathMeasure();
+        mPoint2 = new float[2];
         mCheckStart = new PointF();
         mCheckPivot = new PointF();
         mCheckEnd = new PointF();
+
+        mCheckStart2 = new PointF();
+        mCheckPivot2 = new PointF();
+        mCheckEnd2 = new PointF();
         mCircleStart = new PointF();
         mCheckAnimator = ValueAnimator.ofFloat(0, 1);
         mCircleAnimator = ValueAnimator.ofFloat(0, 1);
@@ -162,14 +180,26 @@ public class CrossView extends View {
             mDrawingRect.bottom = getMeasuredHeight() - getPaddingBottom();
 
             mCheckStart.x = mDrawingRect.left + mDrawingRect.width() / 4;
-            mCheckStart.y = mDrawingRect.top + mDrawingRect.height() / 2;
-            mCheckPivot.x = mDrawingRect.left + mDrawingRect.width() * .426F;
-            mCheckPivot.y = mDrawingRect.top + mDrawingRect.height() * .66F;
-            mCheckEnd.x = 3*(mDrawingRect.left + mDrawingRect.width() / 4);
-            mCheckEnd.y = mDrawingRect.top + mDrawingRect.height() ;
+            mCheckStart.y = mDrawingRect.top + mDrawingRect.height() / 4;
+            mCheckPivot.x = mDrawingRect.left + mDrawingRect.width() /2;
+            mCheckPivot.y = mDrawingRect.top + mDrawingRect.height() /2;
+            mCheckEnd.x = mDrawingRect.left + 3*(mDrawingRect.width() / 4);
+            mCheckEnd.y = mDrawingRect.top + 3*(mDrawingRect.height()/4) ;
+
+
+            mCheckStart2.x = mDrawingRect.left +3*(mDrawingRect.width() / 4);
+            mCheckStart2.y = mDrawingRect.top + (mDrawingRect.height() / 4);
+            mCheckPivot2.x = mDrawingRect.left + mDrawingRect.width() /2;
+            mCheckPivot2.y = mDrawingRect.top + mDrawingRect.height() /2;
+            mCheckEnd2.x = mDrawingRect.left + (mDrawingRect.width() / 4);
+            mCheckEnd2.y = mDrawingRect.top +3* (mDrawingRect.height()/4) ;
+
 
             mMinorContourLength = distance(mCheckStart.x, mCheckStart.y, mCheckPivot.x, mCheckPivot.y);
             mMajorContourLength = distance(mCheckPivot.x, mCheckPivot.y, mCheckEnd.x, mCheckEnd.y);
+
+            mMinorContourLength2 = distance(mCheckStart2.x, mCheckStart2.y, mCheckPivot2.x, mCheckPivot2.y);
+            mMajorContourLength2 = distance(mCheckPivot2.x, mCheckPivot2.y, mCheckEnd2.x, mCheckEnd2.y);
 
             mCircleRect.left = mDrawingRect.left + mStrokeWidth /2;
             mCircleRect.top = mDrawingRect.top + mStrokeWidth /2;
@@ -192,6 +222,7 @@ public class CrossView extends View {
             return;
         }
         canvas.drawPath(mPathCheck, mPaint);
+        canvas.drawPath(mPathCheck2, mPaint);
         canvas.drawPath(mPathCircle, mPaint);
     }
 
@@ -260,6 +291,10 @@ public class CrossView extends View {
         mPathCheck.moveTo(mCheckStart.x, mCheckStart.y);
         mPathCheck.lineTo(mCheckPivot.x, mCheckPivot.y);
         mPathCheck.lineTo(mCheckEnd.x, mCheckEnd.y);
+        mPathCheck2.reset();
+        mPathCheck2.moveTo(mCheckStart2.x, mCheckStart2.y);
+        mPathCheck2.lineTo(mCheckPivot2.x, mCheckPivot2.y);
+        mPathCheck2.lineTo(mCheckEnd2.x, mCheckEnd2.y);
     }
 
     /**
@@ -283,6 +318,17 @@ public class CrossView extends View {
             mPathCheck.moveTo(mCheckStart.x, mCheckStart.y);
             mPathCheck.lineTo(mCheckPivot.x, mCheckPivot.y);
             mPathCheck.lineTo(mPoint[0], mPoint[1]);
+
+
+            mPathCheck2.reset();
+            mPathCheck2.moveTo(mCheckPivot2.x, mCheckPivot2.y);
+            mPathCheck2.lineTo(mCheckEnd2.x, mCheckEnd2.y);
+            mPathMeasure2.setPath(mPathCheck2, false);
+            mPathMeasure2.getPosTan(distance, mPoint2, null);
+            mPathCheck2.reset();
+            mPathCheck2.moveTo(mCheckStart2.x, mCheckStart2.y);
+            mPathCheck2.lineTo(mCheckPivot2.x, mCheckPivot2.y);
+            mPathCheck2.lineTo(mPoint2[0], mPoint2[1]);
         } else if (percent < pivotPercent) {
             final float minorPercent = percent / pivotPercent;
             final float distance = mMinorContourLength * minorPercent;
@@ -291,8 +337,16 @@ public class CrossView extends View {
             mPathCheck.reset();
             mPathCheck.moveTo(mCheckStart.x, mCheckStart.y);
             mPathCheck.lineTo(mPoint[0], mPoint[1]);
+
+            mPathMeasure2.setPath(mPathCheck2, false);
+            mPathMeasure2.getPosTan(distance, mPoint2, null);
+            mPathCheck2.reset();
+            mPathCheck2.moveTo(mCheckStart2.x, mCheckStart2.y);
+            mPathCheck2.lineTo(mPoint2[0], mPoint2[1]);
+
         } else if (percent == pivotPercent) {
             mPathCheck.lineTo(mCheckPivot.x, mCheckPivot.y);
+            mPathCheck2.lineTo(mCheckPivot2.x, mCheckPivot2.y);
         }
     }
 
