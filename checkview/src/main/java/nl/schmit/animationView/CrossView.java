@@ -1,4 +1,4 @@
-package cdflynn.android.library.checkview;
+package nl.schmit.animationView;
 
 import android.animation.ValueAnimator;
 import android.annotation.TargetApi;
@@ -22,12 +22,14 @@ import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Interpolator;
 import android.view.animation.PathInterpolator;
 
+import cdflynn.android.library.checkview.R;
+
 /**
  * Animating check mark.
  */
 public class CrossView extends View {
 
-    private static final String TAG = CheckView.class.getSimpleName();
+    private static final String TAG = CrossView.class.getSimpleName();
     private static final boolean DEBUG = false;
     private static final long CHECK_ANIM_DURATION = 300L;
     private static final long SCALE_ANIM_DELAY = 280L;
@@ -95,23 +97,23 @@ public class CrossView extends View {
     private ValueAnimator mScaleAnimator;
     private boolean mChecked = false;
 
-    public CheckView(Context context) {
+    public CrossView(Context context) {
         super(context);
         init(context, null);
     }
 
-    public CheckView(Context context, AttributeSet attrs) {
+    public CrossView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(context, attrs);
     }
 
-    public CheckView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public CrossView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context, attrs);
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public CheckView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public CrossView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         init(context, attrs);
     }
@@ -163,7 +165,7 @@ public class CrossView extends View {
             mCheckStart.y = mDrawingRect.top + mDrawingRect.height() / 2;
             mCheckPivot.x = mDrawingRect.left + mDrawingRect.width() * .426F;
             mCheckPivot.y = mDrawingRect.top + mDrawingRect.height() * .66F;
-            mCheckEnd.x = 3(mDrawingRect.left + mDrawingRect.width() / 4);
+            mCheckEnd.x = 3*(mDrawingRect.left + mDrawingRect.width() / 4);
             mCheckEnd.y = mDrawingRect.top + mDrawingRect.height() ;
 
             mMinorContourLength = distance(mCheckStart.x, mCheckStart.y, mCheckPivot.x, mCheckPivot.y);
@@ -177,7 +179,7 @@ public class CrossView extends View {
             mCircleStart.y = mCircleRect.bottom /2;
 
             if (DEBUG && (mDrawingRect.width() != mDrawingRect.height())) {
-                Log.w(TAG, "WARNING: " + CheckView.class.getSimpleName() + " will look weird because you've given it a non-square drawing area.  " +
+                Log.w(TAG, "WARNING: " + CrossView.class.getSimpleName() + " will look weird because you've given it a non-square drawing area.  " +
                         "Make sure the width, height, and padding resolve to a square.");
             }
         }
@@ -196,7 +198,7 @@ public class CrossView extends View {
     //region instance methods
 
     /**
-     * Tell this {@link CheckView} to animate into the checked state.
+     * Tell this {@link CrossView} to animate into the checked state.
      */
     public void check() {
         mChecked = true;
@@ -337,8 +339,8 @@ public class CrossView extends View {
         @Override
         public void onAnimationUpdate(ValueAnimator animation) {
             final float value = (float) animation.getAnimatedValue();
-            CheckView.this.setScaleX(value);
-            CheckView.this.setScaleY(value);
+            CrossView.this.setScaleX(value);
+            CrossView.this.setScaleY(value);
             invalidate();
         }
     };

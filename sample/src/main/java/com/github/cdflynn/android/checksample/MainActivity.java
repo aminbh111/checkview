@@ -4,18 +4,18 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import cdflynn.android.library.checkview.CheckView;
+import nl.schmit.animationView.CrossView;
 
 public class MainActivity extends AppCompatActivity {
 
     static class Views {
 
         View button;
-        CheckView check;
+        CrossView check;
 
         Views(MainActivity activity) {
             button = activity.findViewById(R.id.button);
-            check = (CheckView) activity.findViewById(R.id.check);
+            check = (CrossView) activity.findViewById(R.id.check);
         }
     }
 
