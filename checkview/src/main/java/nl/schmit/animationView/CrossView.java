@@ -22,7 +22,7 @@ import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Interpolator;
 import android.view.animation.PathInterpolator;
 
-import cdflynn.android.library.checkview.R;
+import nl.schmit.animationView.crossView.R;
 
 /**
  * Animating check mark.
@@ -142,11 +142,11 @@ public class CrossView extends View {
             return;
         }
         
-        TypedArray a = c.getTheme().obtainStyledAttributes(attrs, R.styleable.CheckView, 0, 0);
+        TypedArray a = c.getTheme().obtainStyledAttributes(attrs, R.styleable.CrossView, 0, 0);
 
         try {
-            mStrokeWidth = a.getDimension(R.styleable.CheckView_checkView_strokeWidth, DEFAULT_STROKE_WIDTH);
-            mStrokeColor = a.getColor(R.styleable.CheckView_checkView_strokeColor, DEFAULT_STROKE_COLOR);
+            mStrokeWidth = a.getDimension(R.styleable.CrossView_crossView_strokeWidth, DEFAULT_STROKE_WIDTH);
+            mStrokeColor = a.getColor(R.styleable.CrossView_crossView_strokeColor, DEFAULT_STROKE_COLOR);
         } finally {
             a.recycle();
         }

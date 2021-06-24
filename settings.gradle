@@ -1,1 +1,1 @@
-include ':sample', ':checkview'
+include ':sample', ':crossView'

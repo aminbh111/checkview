@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="CheckView">
-        <attr name="checkView_strokeWidth" format="dimension"/>
-        <attr name="checkView_strokeColor" format="color"/>
+    <declare-styleable name="CrossView">
+        <attr name="crossView_strokeWidth" format="dimension"/>
+        <attr name="crossView_strokeColor" format="color"/>
     </declare-styleable>
 </resources>
