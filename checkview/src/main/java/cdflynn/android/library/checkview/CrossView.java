@@ -25,7 +25,7 @@ import android.view.animation.PathInterpolator;
 /**
  * Animating check mark.
  */
-public class CheckView extends View {
+public class CrossView extends View {
 
     private static final String TAG = CheckView.class.getSimpleName();
     private static final boolean DEBUG = false;
@@ -163,8 +163,8 @@ public class CheckView extends View {
             mCheckStart.y = mDrawingRect.top + mDrawingRect.height() / 2;
             mCheckPivot.x = mDrawingRect.left + mDrawingRect.width() * .426F;
             mCheckPivot.y = mDrawingRect.top + mDrawingRect.height() * .66F;
-            mCheckEnd.x = mDrawingRect.left + mDrawingRect.width() * .75F;
-            mCheckEnd.y = mDrawingRect.top + mDrawingRect.height() * .30F;
+            mCheckEnd.x = 3(mDrawingRect.left + mDrawingRect.width() / 4);
+            mCheckEnd.y = mDrawingRect.top + mDrawingRect.height() ;
 
             mMinorContourLength = distance(mCheckStart.x, mCheckStart.y, mCheckPivot.x, mCheckPivot.y);
             mMajorContourLength = distance(mCheckPivot.x, mCheckPivot.y, mCheckEnd.x, mCheckEnd.y);
