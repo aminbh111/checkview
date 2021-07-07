@@ -27,9 +27,9 @@ import nl.schmit.animationView.crossView.R;
 /**
  * Animating check mark.
  */
-public class CrossView extends View {
+public class ExclamationView extends View {
 
-    private static final String TAG = CrossView.class.getSimpleName();
+    private static final String TAG = ExclamationView.class.getSimpleName();
     private static final boolean DEBUG = false;
     private static final long CHECK_ANIM_DURATION = 300L;
     private static final long SCALE_ANIM_DELAY = 280L;
@@ -108,23 +108,23 @@ public class CrossView extends View {
     private ValueAnimator mScaleAnimator;
     private boolean mChecked = false;
 
-    public CrossView(Context context) {
+    public ExclamationView(Context context) {
         super(context);
         init(context, null);
     }
 
-    public CrossView(Context context, AttributeSet attrs) {
+    public ExclamationView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(context, attrs);
     }
 
-    public CrossView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public ExclamationView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context, attrs);
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public CrossView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public ExclamationView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         init(context, attrs);
     }
@@ -179,20 +179,20 @@ public class CrossView extends View {
             mDrawingRect.right = getMeasuredWidth() - getPaddingRight();
             mDrawingRect.bottom = getMeasuredHeight() - getPaddingBottom();
 
-            mCheckStart.x = mDrawingRect.left + mDrawingRect.width() / 4;
-            mCheckStart.y = mDrawingRect.top + mDrawingRect.height() / 4;
+            mCheckStart.x = mDrawingRect.left + mDrawingRect.width() / 2;
+            mCheckStart.y = mDrawingRect.top + mDrawingRect.height() / 5;
             mCheckPivot.x = mDrawingRect.left + mDrawingRect.width() /2;
             mCheckPivot.y = mDrawingRect.top + mDrawingRect.height() /2;
-            mCheckEnd.x = mDrawingRect.left + 3*(mDrawingRect.width() / 4);
-            mCheckEnd.y = mDrawingRect.top + 3*(mDrawingRect.height()/4) ;
+            mCheckEnd.x = mDrawingRect.left + mDrawingRect.width() / 2;
+            mCheckEnd.y = mDrawingRect.top + 3*(mDrawingRect.height() / 5) ;
 
 
-            mCheckStart2.x = mDrawingRect.left +3*(mDrawingRect.width() / 4);
-            mCheckStart2.y = mDrawingRect.top + (mDrawingRect.height() / 4);
-            mCheckPivot2.x = mDrawingRect.left + mDrawingRect.width() /2;
-            mCheckPivot2.y = mDrawingRect.top + mDrawingRect.height() /2;
-            mCheckEnd2.x = mDrawingRect.left + (mDrawingRect.width() / 4);
-            mCheckEnd2.y = mDrawingRect.top +3* (mDrawingRect.height()/4) ;
+            mCheckStart2.x = mDrawingRect.left + mDrawingRect.width() / 2;
+            mCheckStart2.y = mDrawingRect.top + 4*(mDrawingRect.height() / 5)-5 ;
+            mCheckPivot2.x = mDrawingRect.left + mDrawingRect.width() / 2;
+            mCheckPivot2.y = mDrawingRect.top + 4*(mDrawingRect.height() / 5) ;
+            mCheckEnd2.x = mDrawingRect.left + mDrawingRect.width() / 2;
+            mCheckEnd2.y = mDrawingRect.top + 4*(mDrawingRect.height() / 5) ;
 
 
             mMinorContourLength = distance(mCheckStart.x, mCheckStart.y, mCheckPivot.x, mCheckPivot.y);
@@ -209,7 +209,7 @@ public class CrossView extends View {
             mCircleStart.y = mCircleRect.bottom /2;
 
             if (DEBUG && (mDrawingRect.width() != mDrawingRect.height())) {
-                Log.w(TAG, "WARNING: " + CrossView.class.getSimpleName() + " will look weird because you've given it a non-square drawing area.  " +
+                Log.w(TAG, "WARNING: " + ExclamationView.class.getSimpleName() + " will look weird because you've given it a non-square drawing area.  " +
                         "Make sure the width, height, and padding resolve to a square.");
             }
         }
@@ -229,7 +229,7 @@ public class CrossView extends View {
     //region instance methods
 
     /**
-     * Tell this {@link CrossView} to animate into the checked state.
+     * Tell this {@link ExclamationView} to animate into the checked state.
      */
     public void check() {
         mChecked = true;
@@ -393,8 +393,8 @@ public class CrossView extends View {
         @Override
         public void onAnimationUpdate(ValueAnimator animation) {
             final float value = (float) animation.getAnimatedValue();
-            CrossView.this.setScaleX(value);
-            CrossView.this.setScaleY(value);
+            ExclamationView.this.setScaleX(value);
+            ExclamationView.this.setScaleY(value);
             invalidate();
         }
     };

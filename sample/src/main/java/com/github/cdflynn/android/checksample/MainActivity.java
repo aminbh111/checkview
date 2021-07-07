@@ -5,17 +5,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import nl.schmit.animationView.CrossView;
+import nl.schmit.animationView.ExclamationView;
 
 public class MainActivity extends AppCompatActivity {
 
     static class Views {
 
         View button;
-        CrossView check;
+        ExclamationView check;
 
         Views(MainActivity activity) {
             button = activity.findViewById(R.id.button);
-            check = (CrossView) activity.findViewById(R.id.check);
+            check = (ExclamationView) activity.findViewById(R.id.check);
         }
     }
 
