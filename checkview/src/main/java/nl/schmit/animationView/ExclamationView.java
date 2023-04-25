@@ -385,8 +385,8 @@ public class ExclamationView extends View {
 
     private final ValueAnimator.AnimatorUpdateListener mScaleAnimatorListener = animation -> {
         final float value = (float) animation.getAnimatedValue();
-        CheckView.this.setScaleX(value);
-        CheckView.this.setScaleY(value);
+        ExclamationView.this.setScaleX(value);
+        ExclamationView.this.setScaleY(value);
         invalidate();
     };
     //endregion
