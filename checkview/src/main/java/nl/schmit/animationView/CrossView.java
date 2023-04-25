@@ -11,10 +11,10 @@ import android.graphics.PathMeasure;
 import android.graphics.PointF;
 import android.graphics.RectF;
 import android.os.Build;
-import android.support.annotation.ColorInt;
-import android.support.annotation.FloatRange;
-import android.support.annotation.Nullable;
-import android.support.v4.view.animation.FastOutSlowInInterpolator;
+import androidx.annotation.ColorInt;
+import androidx.annotation.FloatRange;
+import androidx.annotation.Nullable;
+import androidx.interpolator.view.animation.FastOutSlowInInterpolator;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -371,32 +371,23 @@ public class CrossView extends View {
     //endregion private methods
 
     //region animator listeners
-    private final ValueAnimator.AnimatorUpdateListener mCheckAnimatorListener = new ValueAnimator.AnimatorUpdateListener() {
-        @Override
-        public void onAnimationUpdate(ValueAnimator animation) {
-            final float fraction = animation.getAnimatedFraction();
-            setCheckPathPercentage(fraction);
-            invalidate();
-        }
+    private final ValueAnimator.AnimatorUpdateListener mCheckAnimatorListener = animation -> {
+        final float fraction = animation.getAnimatedFraction();
+        setCheckPathPercentage(fraction);
+        invalidate();
     };
 
-    private final ValueAnimator.AnimatorUpdateListener mCircleAnimatorListener = new ValueAnimator.AnimatorUpdateListener() {
-        @Override
-        public void onAnimationUpdate(ValueAnimator animation) {
-            final float fraction = animation.getAnimatedFraction();
-            setCirclePathPercentage(fraction);
-            invalidate();
-        }
+    private final ValueAnimator.AnimatorUpdateListener mCircleAnimatorListener = animation -> {
+        final float fraction = animation.getAnimatedFraction();
+        setCirclePathPercentage(fraction);
+        invalidate();
     };
 
-    private final ValueAnimator.AnimatorUpdateListener mScaleAnimatorListener = new ValueAnimator.AnimatorUpdateListener() {
-        @Override
-        public void onAnimationUpdate(ValueAnimator animation) {
-            final float value = (float) animation.getAnimatedValue();
-            CrossView.this.setScaleX(value);
-            CrossView.this.setScaleY(value);
-            invalidate();
-        }
+    private final ValueAnimator.AnimatorUpdateListener mScaleAnimatorListener = animation -> {
+        final float value = (float) animation.getAnimatedValue();
+        CheckView.this.setScaleX(value);
+        CheckView.this.setScaleY(value);
+        invalidate();
     };
     //endregion
 }
