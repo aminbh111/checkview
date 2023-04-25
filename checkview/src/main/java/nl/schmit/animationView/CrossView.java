@@ -385,8 +385,8 @@ public class CrossView extends View {
 
     private final ValueAnimator.AnimatorUpdateListener mScaleAnimatorListener = animation -> {
         final float value = (float) animation.getAnimatedValue();
-        CheckView.this.setScaleX(value);
-        CheckView.this.setScaleY(value);
+        CrossView.this.setScaleX(value);
+        CrossView.this.setScaleY(value);
         invalidate();
     };
     //endregion
